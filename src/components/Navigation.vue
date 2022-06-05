@@ -38,11 +38,18 @@
         </li>
 
         <li class="nav-item">
-          <a v-if="isLoggedIn()" class="nav-link" @click="this.logout()"
+          <a
+            v-if="isLoggedIn()"
+            class="nav-link"
+            @click="this.logout()"
             >Logout</a
           >
-          <router-link v-else to="/login" class="nav-link">Login</router-link>
-          <!-- <router-link v-else to="/login" class="nav-link">login</router-link> -->
+          <router-link
+            v-else
+            to="/login"
+            class="nav-link"
+            >Login</router-link
+          >
         </li>
       </ul>
     </div>
@@ -58,12 +65,12 @@ export default {
       this.$store
         .dispatch("logout")
         .then(() => {
-          this.$router.push("/");
+          this.$router.push("/login");
         })
         .catch((error) => console.log(error));
     },
     isLoggedIn() {
-      return this.$store.state.token;
+      return this.$store.state.JWTtoken;
     },
   },
 };

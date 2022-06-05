@@ -7,13 +7,13 @@
           <form>
             <h1 class="h3 mb-3 font-weight-normal"> Please sign in</h1>
             <div class="mt-3">
-              <label for="inputUsername" class="sr-only">Username</label>
+              <label for="inputUsername" class="sr-only">email</label>
               <input
                 id="inputUsername"
                 type="text"
                 class="form-control"
-                v-model="username"
-                placeholder="Enter your username..."
+                v-model="email"
+                placeholder="Enter your email..."
               />
             </div>
             <div class="mt-3">
@@ -39,7 +39,7 @@ export default {
   name: "Login",
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
       errorMessage: null,
     };
@@ -49,11 +49,11 @@ export default {
     login() {
       this.$store
         .dispatch("login", {
-          username: this.username,
+          email: this.email,
           password: this.password,
         })
         .then(() => {
-          this.$router.replace("/");
+          this.$router.replace("/users");
         })
         .catch((error) => {
           this.errorMessage = error;

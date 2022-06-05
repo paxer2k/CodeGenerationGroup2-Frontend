@@ -9,25 +9,24 @@
         <th>User Firstname</th>
       </thead>
       <tbody>
-        <tr v-for = "user in users" v-bind:key = "user.id">
-          <td> {{user.userID}} </td>
-          <td> {{user.address}} </td>
-          <td> {{user.email}} </td>
-          <td> {{user.firstName}} </td>
-        </tr>
+        <user-list-item
+          v-for="user in users"
+          :key="user.userID"
+          :user="user"
+          @update="getUsers"
+        />
       </tbody>
     </table>
     </div>
-
-
 </template>
 
 <script>
-import axios from "../axios-auth";
+import axios from "../../axios-auth";
+import UserListItem from './UserListItem.vue'
 export default {
   name: "UserList",
   components: {
-    
+    UserListItem,
   },
   data() {
     return {
@@ -39,9 +38,13 @@ export default {
   },
   methods: {
     getUsers() {
+      axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem('JWTtoken');
       axios.get("/users").then((result) => {
         this.users = result.data;
-      });
+      }).catch((error) => console.log(error));
+    },
+    isLoggedIn() {
+      return this.$store.state.JWTtoken;
     },
   },
 };

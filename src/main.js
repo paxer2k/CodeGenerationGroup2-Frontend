@@ -5,7 +5,7 @@ import store from './store/store'
 
 
 import Home from './components/Home.vue';
-import UserList from './components/UserList.vue'
+import UserList from './components/users/UserList.vue'
 import Login from './components/Login.vue'
 import Signup from './components/Signup.vue'
 // import the missing components
@@ -14,7 +14,7 @@ import Signup from './components/Signup.vue'
 const routes = [
     { path: '/', component: Home },
     { path: '/users', component: UserList },
-    { path: '/login', component: Login},
+    { path: '/login', component: Login },
     { path: '/signup', component: Signup}
 
 ];

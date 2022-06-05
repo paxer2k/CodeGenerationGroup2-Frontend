@@ -4,8 +4,9 @@ import axios from '../axios-auth'
 const store = createStore({
     state() {
         return {
-            token: null,
-            username: null,
+            JWTtoken: null,
+            token_type: null,
+            expires_at: null,
         }
     },
 
@@ -15,8 +16,9 @@ const store = createStore({
 
     mutations: {
         authenticateUser(state, parameters) {
-            state.token = parameters.token;
-            state.username = parameters.username;
+            state.JWTtoken = parameters.JWTtoken;
+            state.token_type = parameters.token_type;
+            state.expires_at = parameters.expires_at;
         },
 
         // logout(state) {
@@ -31,17 +33,19 @@ const store = createStore({
     actions: {
 
         autoLogin({ commit }) {
-            let token = localStorage.getItem('token');
-            let username = localStorage.getItem('username');
+            let JWTtoken = localStorage.getItem('JWTtoken');
+            let token_type = localStorage.getItem('token_type');
+            let expires_at = localStorage.getItem('expires_at');
 
-            if (!token)
+            if (!JWTtoken)
                 return;
 
             // if the token is STILL valid, auto login for the user
-            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+            axios.defaults.headers.common["Authorization"] = "Bearer " + JWTtoken;
             commit('authenticateUser', {
-                token: token,
-                username: username,
+                JWTtoken: JWTtoken,
+                token_type: token_type,
+                expires_at: expires_at,
             });
         },
 
@@ -49,8 +53,9 @@ const store = createStore({
             return new Promise((resolve) => {
                 localStorage.clear();
                 axios.defaults.headers.common["Authorization"] = "";
-                this.state.token = null;
-                this.state.username = null;
+                this.state.JWTtoken = null;
+                this.state.token_type = null;
+                this.state.expires_at = null;
                 resolve();
             })
         },
@@ -58,20 +63,22 @@ const store = createStore({
         login({ commit }, parameters) {
             return new Promise((resolve, reject) => {
                 axios.post("/login", {
-                    username: parameters.username,
+                    email: parameters.email,
                     password: parameters.password,
                 })
                     .then((result) => {
                         axios.defaults.headers.common["Authorization"] = "Bearer " +
-                            result.data.token;
+                            result.data.JWTtoken;
 
                         // if f5 is pressed or the page is shut off, store the bearer token in the browser so that the user can stay logged in if the open the page again
-                        localStorage.setItem('token', result.data.token);
-                        localStorage.setItem('username', result.data.username);
+                        localStorage.setItem('JWTtoken', result.data.JWTtoken);
+                        localStorage.setItem('token_type', result.data.token_type);
+                        localStorage.setItem('expires_at', result.data.expires_at);
 
                         commit('authenticateUser', {
-                            token: result.data.token,
-                            username: result.data.username,
+                            JWTtoken: result.data.JWTtoken,
+                            token_type: result.data.token_type,
+                            expires_at: result.data.expires_at,
                         });
                         resolve();
                     })
