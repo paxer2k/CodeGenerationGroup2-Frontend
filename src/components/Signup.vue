@@ -1,9 +1,10 @@
 <template>
-  <body class="body-login">
-    <main class="form-login">
-
-      <b-form @submit="signup">
-        <h1 class="h3 mb-3 fw-normal">Please Signup</h1>
+    <div class="container">
+      <div v-if="errorMessage" class="alert alert-danger" role="alert">
+          {{ errorMessage }}
+        </div>
+      <form>
+        <h1 class="h3 mb-3 fw-normal">Create a user</h1>
 
         <div class="form-floating">
           <input
@@ -67,11 +68,11 @@
 
         <div class="form-floating">
           <input
-            type="tel"
+            type="text"
             class="form-control"
             id="floatingInput"
             title="Fill in a correct phone"
-            v-model="user.phone"
+            v-model="user.phoneNumber"
             placeholder="Phone"
           />
           <label for="floatingInput">Phone</label>
@@ -79,18 +80,22 @@
 
         <div class="form-floating">
           <input
-            type="tel"
+            type="text"
             class="form-control"
             id="floatingInput"
-            title="Fill in a correct user type"
-            v-model="user.userType"
-            placeholder="User type"
+            title="Fill in a correct roles"
+            v-model="user.roles"
+            placeholder="Roles"
           />
-          <label for="floatingInput">User type</label>
+          <label for="floatingInput">Roles</label>
         </div>
 
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
-          Sign Up
+        <button
+          class="w-100 btn btn-lg btn-success"
+          type="button"
+          @click="this.signup()"
+        >
+          Create user
         </button>
         <div class="card-footer py-3 border-0">
           <div class="text-center text-light">
@@ -103,13 +108,12 @@
             {{ errorMessage }}
           </div>
         </div>
-      </b-form>
-    </main>
-  </body>
+      </form>
+    </div>
 </template>
 
 <script>
-import axios from "axios";
+import axios from "./../axios-auth";
 
 export default {
   name: "Signup",
@@ -122,33 +126,27 @@ export default {
         password: "",
         address: "",
         phoneNumber: "",
-        userType: "",
-       },
-        errorMessage: "",
+        roles: "",
+      },
+      errorMessage: "",
     };
   },
   methods: {
-    async signup() {
-
-      try {
-        await axios.post('/users', {
-          firstname: this.firstname,
-          lastname: this.lastname,
-          email: this.email,
-          password: this.password,
-          address: this.address,
-          phone: this.phone,
-          userType: this.userType,
+    signup() {
+      axios
+        .post("/users", this.user)
+        .then((result) => {
+          console.log(result);
+          alert("User " + this.user.firstName + " " + this.user.lastName + " has been created!");
+          this.$router.push("/")
+        })
+        .catch((error) => {
+          this.errorMessage = error;
+          console.log(error);
         });
-
-        this.$router.push('/login');
-      } catch (error) {
-        this.errorMessage = error.response.data
-      }
-
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 

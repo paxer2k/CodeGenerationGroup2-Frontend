@@ -4,9 +4,12 @@
     <table class="table table-stripped">
       <thead>
         <th>User Id</th>
-        <th>User Username</th>
-        <th>User Email</th>
         <th>User Firstname</th>
+        <th>User Lastname</th>
+        <th>User Email</th>
+        <th>User PhoneNumber</th>
+        <th>User Roles</th>
+
       </thead>
       <tbody>
         <user-list-item
@@ -38,7 +41,6 @@ export default {
   },
   methods: {
     getUsers() {
-      axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem('JWTtoken');
       axios.get("/users").then((result) => {
         this.users = result.data;
       }).catch((error) => console.log(error));

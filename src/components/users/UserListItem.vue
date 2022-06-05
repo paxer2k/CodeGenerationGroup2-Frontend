@@ -1,9 +1,11 @@
 <template>
   <tr>
     <td>{{ user.userID }}</td>
-    <td>{{ user.address }}</td>
-    <td>{{ user.email }}</td>
     <td>{{ user.firstName }}</td>
+    <td>{{ user.lastName }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.phone }}</td>
+    <td>{{ user.roles }}</td>
   </tr>
 </template>
 

@@ -12,6 +12,13 @@
             >Users</router-link
           >
         </li>
+
+        <li class="nav-item">
+          <router-link to="/profile" class="nav-link" active-class="active"
+            >Profile</router-link
+          >
+        </li>
+
         <li class="nav-item">
           <router-link to="/accounts" class="nav-link" active-class="active"
             >Accounts</router-link
