@@ -7,11 +7,19 @@ const store = createStore({
             JWTtoken: null,
             token_type: null,
             expires_at: null,
+            userID: null,
+            roles: null,
         }
     },
 
     getters: {
+        isAuthenticated(state) {
+            return state.JWTtoken != null;
+        },
 
+        isEmployee(state) {
+            return state.roles == "ROLE_EMPLOYEE";
+        }
     },
 
     mutations: {
@@ -19,6 +27,8 @@ const store = createStore({
             state.JWTtoken = parameters.JWTtoken;
             state.token_type = parameters.token_type;
             state.expires_at = parameters.expires_at;
+            state.userID = parameters.userID;
+            state.roles = parameters.roles;
         },
 
         // logout(state) {
@@ -36,6 +46,8 @@ const store = createStore({
             let JWTtoken = localStorage.getItem('JWTtoken');
             let token_type = localStorage.getItem('token_type');
             let expires_at = localStorage.getItem('expires_at');
+            let userID = localStorage.getItem('userID');
+            let roles = localStorage.getItem('roles');
 
             if (!JWTtoken)
                 return;
@@ -46,6 +58,8 @@ const store = createStore({
                 JWTtoken: JWTtoken,
                 token_type: token_type,
                 expires_at: expires_at,
+                userID: userID,
+                roles: roles,
             });
         },
 
@@ -56,6 +70,8 @@ const store = createStore({
                 this.state.JWTtoken = null;
                 this.state.token_type = null;
                 this.state.expires_at = null;
+                this.state.userID = null,
+                this.state.roles = null,
                 resolve();
             })
         },
@@ -74,11 +90,15 @@ const store = createStore({
                         localStorage.setItem('JWTtoken', result.data.JWTtoken);
                         localStorage.setItem('token_type', result.data.token_type);
                         localStorage.setItem('expires_at', result.data.expires_at);
+                        localStorage.setItem('userID', result.data.userID);
+                        localStorage.setItem('roles', result.data.roles);
 
                         commit('authenticateUser', {
                             JWTtoken: result.data.JWTtoken,
                             token_type: result.data.token_type,
                             expires_at: result.data.expires_at,
+                            userID: result.data.userID,
+                            roles: result.data.roles,
                         });
                         resolve();
                     })

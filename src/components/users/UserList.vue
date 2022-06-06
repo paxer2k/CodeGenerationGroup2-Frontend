@@ -3,12 +3,14 @@
     <h1 class="text-center"> User List </h1>
     <table class="table table-stripped">
       <thead>
-        <th>User Id</th>
-        <th>User Firstname</th>
-        <th>User Lastname</th>
-        <th>User Email</th>
-        <th>User PhoneNumber</th>
-        <th>User Roles</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Address</th>
+        <th>DayLimitLeft</th>
+        <th>TotalDayLimit</th>
+        <th>Roles</th>
 
       </thead>
       <tbody>
