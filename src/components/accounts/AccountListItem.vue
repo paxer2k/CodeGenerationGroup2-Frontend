@@ -7,6 +7,7 @@
     <td>{{ account.absoluteLimit }}</td>
     <td><button type="button" class="btn btn-warning" @click="updateAccount(account.iban)">Edit</button></td>
     <td><button type="button" class="btn btn-danger" @click="deleteAccount(account.iban)">Delete</button></td>
+    <td><button type="button" class="btn btn-success" @click="createTransaction(account.iban)">Create transaction</button></td>
   </tr>
 </template>
 
@@ -29,6 +30,9 @@ export default {
     },
     updateAccount(iban) {
       this.$router.push("/updateaccount/" + iban)
+    },
+    createTransaction(iban) {
+      this.$router.push("/createtransaction/" + iban)
     }
   }
 };

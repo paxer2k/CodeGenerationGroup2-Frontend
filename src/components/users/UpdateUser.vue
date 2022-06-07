@@ -1,6 +1,9 @@
 <template>
   <section>
     <div class="container col-lg-5">
+      <div v-if="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
       <form ref="form">
         <h2 class="mt-3 mt-lg-5" style="text-align: center">Edit user</h2>
         <h5 class="mb-4"></h5>
@@ -84,6 +87,7 @@ export default {
         transactionLimit: 0,
         dayLimit: 0,
       },
+      errorMessage: "",
     };
   },
   mounted() {
@@ -110,7 +114,10 @@ export default {
           );
           this.$router.push("/users");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.errorMessage = error.response.data.message;
+          console.log(error);
+        });
     },
   },
 };

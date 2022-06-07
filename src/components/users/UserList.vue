@@ -24,7 +24,7 @@
       <input
         type="number"
         min="0"
-        placeholder="Enter an offset"
+        placeholder="Enter an account size"
         v-model="accountSize"
       />
     </div>

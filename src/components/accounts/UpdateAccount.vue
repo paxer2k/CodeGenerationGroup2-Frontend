@@ -1,11 +1,12 @@
 <template>
   <section>
     <div class="container col-lg-5">
+      <div v-if="errorMessage" class="alert alert-danger" role="alert">
+      {{ errorMessage }}
+    </div>
       <form ref="form">
         <h2 class="mt-3 mt-lg-5" style="text-align: center">Edit account</h2>
         <h5 class="mb-4"></h5>
-
-        
         <div class="input-group mb-3">
           <span class="input-group-text">Account type</span>
           <select
@@ -95,7 +96,9 @@ export default {
           alert("Account " + this.account.iban + " " + " has been updated!");
           this.$router.push("/accounts");
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          this.errorMessage = error.response.data.message;
+        });
     },
   },
 };

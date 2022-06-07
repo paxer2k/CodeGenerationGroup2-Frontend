@@ -129,7 +129,10 @@
               <hr />
               <div class="row">
                 <div class="col-sm-3">
-                  <button class="btn btn-success" @click="showTransactions(this.iban)">Show transactions</button>
+                  <button class="btn btn-success" @click="showTransactions(account.iban)">Show transactions</button>
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-primary" @click="makeTransaction(account.iban)">Make a transaction</button>
                 </div>
               </div>
               <hr/>
@@ -162,8 +165,11 @@ export default {
         })
         .catch((error) => console.log(error));
     },
-    showTransaction(iban) {
+    showTransactions(iban) {
       this.$router.push("/transactions/" + iban);
+    },
+    makeTransaction(iban) {
+      this.$router.push("/createtransaction/" + iban);
     }
   },
 };

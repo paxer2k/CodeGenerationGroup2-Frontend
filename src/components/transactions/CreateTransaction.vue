@@ -4,7 +4,7 @@
       {{ errorMessage }}
     </div>
     <form>
-      <h1 class="h3 mb-3 fw-normal">Create a user</h1>
+      <h1 class="h3 mb-3 fw-normal">Create a transaction</h1>
 
       <div class="form-floating">
         <input
@@ -13,11 +13,12 @@
           id="floatingInput"
           pattern="[a-zA-Z][a-zA-Z0-9\s]*"
           title="Fill in a correct firstname"
-          v-model="user.firstName"
-          placeholder="First name"
+          v-model="transaction.fromIBAN"
+          disabled
+          placeholder="From IBAN"
           required
         />
-        <label for="floatingInput">First name</label>
+        <label for="floatingInput">IBAN From</label>
       </div>
 
       <div class="form-floating">
@@ -27,102 +28,58 @@
           id="floatingInput"
           pattern="[a-zA-Z][a-zA-Z0-9\s]*"
           title="Fill in a correct lastname"
-          v-model="user.lastName"
+          v-model="transaction.toIBAN"
           placeholder="Last name"
           required
         />
-        <label for="floatingInput">Last name</label>
+        <label for="floatingInput">IBAN To</label>
       </div>
 
       <div class="form-floating">
         <input
-          type="email"
+          type="text"
           class="form-control"
           id="floatingInput"
-          v-model="user.email"
+          v-model="transaction.amount"
           placeholder="name@example.com"
           required
         />
-        <label for="floatingInput">Email address</label>
+        <label for="floatingInput">Amount</label>
+      </div>
+
+      <div class="form-floating">
+        <input
+          type="text"
+          class="form-control"
+          id="floatingPassword"
+          v-model="transaction.userID"
+          disabled
+          placeholder="Password"
+          required
+        />
+        <label for="floatingPassword">userID</label>
       </div>
 
       <div class="form-floating">
         <input
           type="password"
           class="form-control"
-          id="floatingPassword"
-          v-model="user.password"
-          placeholder="Password"
-          required
-        />
-        <label for="floatingPassword">Password</label>
-      </div>
-
-      <div class="form-floating">
-        <input
-          type="text"
-          class="form-control"
           id="floatingInput"
-          title="Fill in a correct lastname"
-          v-model="user.address"
+          title="Fill a pincode"
+          v-model="transaction.pincode"
           placeholder="Address"
           required
         />
-        <label for="floatingInput">Address</label>
-      </div>
-
-      <div class="form-floating mt-4">
-        <input
-          type="text"
-          class="form-control"
-          id="floatingInput"
-          title="Fill in a correct phone"
-          v-model="user.phoneNumber"
-          placeholder="Phone"
-          required
-        />
-        <label for="floatingInput">Phone</label>
-      </div>
-
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value="ROLE_CUSTOMER"
-          id="flexCheckDefault"
-          v-model="user.roles"
-        />
-        <label class="form-check-label" for="flexCheckDefault">
-          ROLE_CUSTOMER
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          class="form-check-input"
-          type="checkbox"
-          value="ROLE_EMPLOYEE"
-          id="flexCheckChecked"
-          v-model="user.roles"
-          checked
-        />
-        <label class="form-check-label" for="flexCheckChecked">
-          ROLE_EMPLOYEE
-        </label>
+        <label for="floatingInput">Pincode</label>
       </div>
 
       <button
         class="w-100 btn btn-lg btn-success"
         type="button"
-        @click="this.createUser()"
+        @click="this.createTransaction()"
       >
-        Create user
+        Confirm transaction
       </button>
-      <div class="card-footer py-3 border-0">
-        <div class="text-center text-light">
-          Already have an account?
-          <a href="/login" class="text-light">Login</a>
-        </div>
-      </div>
     </form>
   </div>
 </template>
@@ -131,35 +88,36 @@
 import axios from "../../axios-auth";
 
 export default {
-  name: "CreateUser",
+  name: "CreateTransaction",
+  props: {
+      iban: String,
+  },
   data() {
     return {
-      user: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        address: "",
-        phoneNumber: "",
-        roles: [],
+      transaction: {
+          fromIBAN: this.iban,
+          toIBAN: "",
+          amount: 0,
+          userID: localStorage.getItem("userID"),
+          pincode: "",
       },
       errorMessage: "",
     };
   },
   methods: {
-    createUser() {
+    createTransaction() {
       axios
-        .post("/users", this.user)
+        .post("/transactions", this.transaction)
         .then((result) => {
           console.log(result.headers);
           alert(
-            "User " +
-              this.user.firstName +
-              " " +
-              this.user.lastName +
-              " has been created!"
+            "Amount of " +
+              this.transaction.amount +
+              " has been transferred from " +
+              this.transaction.fromIBAN +
+              " to " + this.transaction.toIBAN 
           );
-          this.$router.push("/users");
+            this.$router.push("/transactions/" + this.iban);
         })
         .catch((error) => {
           this.errorMessage = error.response.data.message;

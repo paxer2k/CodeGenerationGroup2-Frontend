@@ -20,18 +20,9 @@
           >
         </li>
 
-        <li class="nav-item" v-if="this.$store.getters.isAuthenticated">
+        <li class="nav-item" v-if="this.$store.getters.isAuthenticated && this.$store.getters.isEmployee">
           <router-link to="/accounts" class="nav-link" active-class="active"
             >Accounts</router-link
-          >
-        </li>
-        <li class="nav-item" v-if="this.$store.getters.isAuthenticated">
-          <router-link
-            to="/transactions"
-            class="nav-link"
-            id="signup-link"
-            active-class="active"
-            >Transactions</router-link
           >
         </li>
 

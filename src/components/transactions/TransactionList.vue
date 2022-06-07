@@ -1,44 +1,21 @@
 <template>
   <div class="container">
     <div class="container-fluid mt-3">
-      <label>Query by username:</label>
-      <input type="text" placeholder="Enter a name" v-model="name" />
+      <label>Query by start and end date:</label>
+      <input type="text" placeholder="Enter an start date" v-model="startDate" />
+      <input type="text" placeholder="Enter an end date" v-model="endDate" />
     </div>
-    <div class="container-fluid mt-3">
-      <label>Query by pagination:</label>
-      <input
-        type="number"
-        min="0"
-        placeholder="Enter an offset"
-        v-model="skip"
-      />
-      <input
-        type="number"
-        min="0"
-        placeholder="Enter an limit"
-        v-model="limit"
-      />
-    </div>
-    <div class="container-fluid mt-3">
-      <label>Query by account size:</label>
-      <input
-        type="number"
-        min="0"
-        placeholder="Enter an offset"
-        v-model="accountSize"
-      />
-    </div>
-    <button class="btn btn-success" @click="getUsersByPagination()">
+    <button class="btn btn-success" @click="getTransactionsByIBANFilter()">
       Search
     </button>
-    <h1 class="text-center">User List</h1>
+    <h1 class="text-center">Transaction list</h1>
     <table class="table table-stripped">
       <thead>
         <th>From IBAN</th>
         <th>To IBAN</th>
         <th>Amount</th>
         <th>Date</th>
-        <th>userID</th>
+        <th>User ID</th>
       </thead>
       <tbody>
         <transaction-list-item
@@ -61,20 +38,38 @@ export default {
     TransactionListItem,
   },
   props: {
-      iban: String
+    iban: String,
   },
   data() {
     return {
       transactions: [],
+      startDate: "",
+      endDate: "",
     };
   },
   mounted() {
     this.getTransactionsByIBAN();
   },
   methods: {
+    getTransactionsByIBANFilter() {
+      axios
+        .get(
+          "/transactions/" +
+            this.iban +
+            "?startDate=" +
+            this.startDate +
+            "&endDate=" +
+            this.endDate
+        )
+        .then((result) => {
+          this.transactions = result.data;
+        })
+        .catch((error) => console.log(error));
+    },
     getTransactionsByIBAN() {
       axios
-        .get("/trasactions/" + this.iban)
+        .get(
+          "/transactions/" + this.iban)
         .then((result) => {
           this.transactions = result.data;
         })

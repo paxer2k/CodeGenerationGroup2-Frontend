@@ -14,6 +14,7 @@ import UpdateUser from './components/users/UpdateUser.vue'
 import UpdateAccount from './components/accounts/UpdateAccount.vue'
 import CreateAccount from './components/accounts/CreateAccount.vue'
 import TransactionList from './components/transactions/TransactionList.vue'
+import CreateTransaction from './components/transactions/CreateTransaction.vue'
 
 // import the missing components
 
@@ -28,7 +29,8 @@ const routes = [
     { path: '/updateuser/:userID', component: UpdateUser, props: true},
     { path: '/updateaccount/:iban', component: UpdateAccount, props: true},
     { path: '/createaccount/:userID', component: CreateAccount, props: true},
-    { path: '/transactions/:iban', component: TransactionList, props: true}
+    { path: '/transactions/:iban', component: TransactionList, props: true},
+    { path: '/createtransaction/:iban', component: CreateTransaction, props: true}
 
 ];
 
