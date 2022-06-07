@@ -5,27 +5,29 @@
         {{ errorMessage }}
       </div>
       <form>
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <div class="mt-3">
-          <label for="inputUsername" class="sr-only">Email</label>
-          <input
-            id="inputUsername"
-            type="text"
-            class="form-control"
-            v-model="email"
-            placeholder="Enter your email..."
-          />
-        </div>
-        <div class="mt-3">
-          <label for="inputPassword" class="sr-only">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="inputPassword"
-            v-model="password"
-            placeholder="Enter your password..."
-          />
-        </div>
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Email</span>
+        <input
+          type="text"
+          class="form-control"
+          id="floatingInput"
+          v-model="this.email"
+          placeholder="Enter your email..."
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Passowrd</span>
+        <input
+          type="password"
+          class="form-control"
+          id="floatingInput"
+          v-model="this.password"
+          placeholder="Enter your password.."
+        />
+      </div>
         <button type="button" @click="login()" class="btn btn-primary mt-3">
           Sign in
         </button>

@@ -53,6 +53,7 @@ export default {
         amount: 0,
         pincode: "",
       },
+      errorMessage: "",
     };
   },
   methods: {

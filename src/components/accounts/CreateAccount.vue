@@ -55,6 +55,7 @@ export default {
         accountType: "",
         userID: this.userID,
       },
+      errorMessage: "",
     };
   },
   methods: {

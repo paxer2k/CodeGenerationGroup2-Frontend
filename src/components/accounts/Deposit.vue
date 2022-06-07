@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-3">
-    <div v-if="errorMessage" class="alert alert-danger" role="alert">
-      {{ errorMessage }}
+    <div v-if="this.errorMessage" class="alert alert-danger" role="alert">
+      {{ this.errorMessage }}
     </div>
     <form>
       <h1 class="h3 mb-3 fw-normal">Despoit</h1>
@@ -53,6 +53,7 @@ export default {
         amount: 0,
         pincode: "",
       },
+      errorMessage: "",
     };
   },
   methods: {

@@ -135,10 +135,10 @@
                   <button class="btn btn-primary" @click="createTransaction(account.iban)">Make a transaction</button>
                 </div>
                 <div class="col-sm-3">
-                  <button class="btn btn-success" @click="deposit(account.iban)">Deposit</button>
+                  <button class="btn btn-success" @click="deposit(account.iban)">Make a deposit</button>
                 </div>
                 <div class="col-sm-3">
-                  <button class="btn btn-danger" @click="withdraw(account.iban)">Withdraw</button>
+                  <button class="btn btn-danger" @click="withdraw(account.iban)">Make a withdraw</button>
                 </div>
               </div>
               <hr/>

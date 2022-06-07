@@ -76,6 +76,7 @@ export default {
         accountStatus: "",
         absoluteLimit: 0,
       },
+      errorMessage: "",
     };
   },
   mounted() {
