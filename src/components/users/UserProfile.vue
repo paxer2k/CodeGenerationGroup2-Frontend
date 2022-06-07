@@ -132,7 +132,13 @@
                   <button class="btn btn-success" @click="showTransactions(account.iban)">Show transactions</button>
                 </div>
                 <div class="col-sm-3">
-                  <button class="btn btn-primary" @click="makeTransaction(account.iban)">Make a transaction</button>
+                  <button class="btn btn-primary" @click="createTransaction(account.iban)">Make a transaction</button>
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-success" @click="deposit(account.iban)">Deposit</button>
+                </div>
+                <div class="col-sm-3">
+                  <button class="btn btn-danger" @click="withdraw(account.iban)">Withdraw</button>
                 </div>
               </div>
               <hr/>
@@ -168,8 +174,14 @@ export default {
     showTransactions(iban) {
       this.$router.push("/transactions/" + iban);
     },
-    makeTransaction(iban) {
+    createTransaction(iban) {
       this.$router.push("/createtransaction/" + iban);
+    },
+    deposit(iban) {
+      this.$router.push("/deposit/" + iban);
+    },
+    withdraw(iban) {
+      this.$router.push("/withdraw/" + iban);
     }
   },
 };

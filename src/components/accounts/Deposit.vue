@@ -4,38 +4,36 @@
       {{ errorMessage }}
     </div>
     <form>
-      <h1 class="h3 mb-3 fw-normal">Create a account</h1>
+      <h1 class="h3 mb-3 fw-normal">Despoit</h1>
 
       <div class="input-group mb-3">
-          <span class="input-group-text">Account type</span>
-          <select
-            class="form-select form-select-sm"
-            aria-label=".form-select-sm example"
-            v-model="account.accountType"
-          >
-            <option selected value="current">current</option>
-            <option value="savings">savings</option>
-          </select>
-        </div>
-
-        <div class="input-group mb-3">
-        <span class="input-group-text">User ID</span>
+        <span class="input-group-text">Amount</span>
         <input
           type="text"
           class="form-control"
           id="floatingInput"
-          v-model="this.account.userID"
-          placeholder="Phone"
-          disabled
+          v-model="this.deposit.amount"
+          placeholder="Amount"
+        />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text">Pincode</span>
+        <input
+          type="password"
+          class="form-control"
+          id="floatingInput"
+          v-model="this.deposit.pincode"
+          placeholder="Pincode"
         />
       </div>
 
       <button
         class="w-100 btn btn-lg btn-success"
         type="button"
-        @click="this.createAccount()"
+        @click="this.depositMoney()"
       >
-        Create account
+        Confirm deposit
       </button>
     </form>
   </div>
@@ -45,31 +43,35 @@
 import axios from "../../axios-auth";
 
 export default {
-  name: "CreateAccount",
+  name: "Deposit",
   props: {
-    userID: String,
+    iban: String,
   },
   data() {
     return {
-      account: {
-        accountType: "",
-        userID: this.userID,
+      deposit: {
+        amount: 0,
+        pincode: "",
       },
     };
   },
   methods: {
-    createAccount() {
+    depositMoney() {
       axios
-        .post("/accounts", this.account)
+        .post("/accounts/" + this.iban + "/deposit", this.deposit)
         .then((result) => {
           console.log(result);
           alert(
-            "Account of type " + "(" + this.account.accountType + ")" + " for " +
-              this.account.userID +
+            "Amount of " +
+              "(" +
+              this.deposit.amount +
+              ")" +
+              " for " +
+              this.iban +
               " " +
-              " has been created!"
+              " has been added!"
           );
-          this.$router.push("/accounts");
+          this.$router.push("/profile");
         })
         .catch((error) => {
           this.errorMessage = error.response.data.message;
