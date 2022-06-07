@@ -117,12 +117,6 @@
       >
         Create user
       </button>
-      <div class="card-footer py-3 border-0">
-        <div class="text-center text-light">
-          Already have an account?
-          <a href="/login" class="text-light">Login</a>
-        </div>
-      </div>
     </form>
   </div>
 </template>
@@ -172,54 +166,5 @@ export default {
 
 
 <style scoped>
-.body-login {
-  display: flex;
-  align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #05050894;
-}
 
-.form-login {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
-}
-
-#login-logo {
-  width: 60%;
-  height: 60%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.form-login .checkbox {
-  font-weight: 400;
-}
-
-.form-login .form-floating:focus-within {
-  z-index: 2;
-}
-
-.form-login input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.form-login input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-#copyright-login {
-  font-size: 0.8rem;
-}
-
-.form-floating {
-  padding-bottom: 5px;
-}
 </style>
