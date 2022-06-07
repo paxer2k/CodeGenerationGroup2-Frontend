@@ -1,6 +1,18 @@
 <template>
   <div class="container">
-    <h1 class="text-center"> Account List </h1>
+    <div class="container-fluid mt-3">
+      <label>Query by IBAN:</label>
+      <input type="text" placeholder="Enter a name" v-model="iban" />
+    </div>
+    <div class="container-fluid mt-3">
+      <label>Query by pagination:</label>
+      <input type="number" placeholder="Enter an offset" v-model="skip" />
+      <input type="number" placeholder="Enter an limit" v-model="limit" />
+    </div>
+    <button class="btn btn-success" @click="getAccountsByPagination()">
+      Search
+    </button>
+    <h1 class="text-center">Account List</h1>
     <table class="table table-stripped">
       <thead>
         <th>Account IBAN</th>
@@ -14,16 +26,16 @@
           v-for="account in accounts"
           :key="account.iban"
           :account="account"
-          @update="getAccountsByIBAN"
+          @update="getAccounts"
         />
       </tbody>
     </table>
-    </div>
+  </div>
 </template>
 
 <script>
 import axios from "../../axios-auth";
-import AccountListItem from './AccountListItem.vue'
+import AccountListItem from "./AccountListItem.vue";
 export default {
   name: "AccountList",
   components: {
@@ -32,18 +44,37 @@ export default {
   data() {
     return {
       accounts: [],
+      skip: 0,
+      limit: 0,
+      iban: "",
     };
   },
   mounted() {
     this.getAccounts();
   },
   methods: {
+    getAccountsByPagination() {
+      axios
+        .get(
+          "/accounts?skip=" +
+            this.skip +
+            "&limit=" +
+            this.limit +
+            "&name=" +
+            this.iban
+        )
+        .then((result) => {
+          this.accounts = result.data;
+        })
+        .catch((error) => console.log(error));
+    },
     getAccounts() {
       axios
-      .get("/accounts/")
-      .then((result) => {
-        this.accounts = result.data;
-      }).catch((error) => console.log(error));
+        .get("/accounts")
+        .then((result) => {
+          this.accounts = result.data;
+        })
+        .catch((error) => console.log(error));
     },
   },
 };

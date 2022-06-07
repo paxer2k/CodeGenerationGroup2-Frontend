@@ -7,9 +7,11 @@
     <td>{{ user.address }}</td>
     <td>{{ user.currentDayLimit }}</td>
     <td>{{ user.dayLimit }}</td>
-    <td>{{ user.roles }}</td>
+    <td>{{getAccountSize(user.accounts)}}</td>
+
     <td><button type="button" class="btn btn-warning" @click="updateUser(user.userID)">Edit</button></td>
     <td><button type="button" class="btn btn-danger" @click="deleteUser(user.userID)">Delete</button></td>
+    <td><button type="button" class="btn btn-success" @click="addAccount(user.userID)">Add account</button></td>
   </tr>
 </template>
 
@@ -32,6 +34,19 @@ export default {
     },
     updateUser(userID) {
       this.$router.push("/updateuser/" + userID)
+    },
+    addAccount(userID) {
+      this.$router.push("/createaccount/" + userID)
+    },
+    getAccountSize(accounts) {
+      var quantity = 0;
+      
+      accounts.forEach(element => {
+        element == null;
+        quantity++;
+      });
+
+      return quantity
     }
   }
 };

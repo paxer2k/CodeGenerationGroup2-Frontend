@@ -34,21 +34,18 @@
     <h1 class="text-center">User List</h1>
     <table class="table table-stripped">
       <thead>
-        <th>Firstname</th>
-        <th>Lastname</th>
-        <th>Email</th>
-        <th>Phone</th>
-        <th>Address</th>
-        <th>DayLimitLeft</th>
-        <th>TotalDayLimit</th>
-        <th>Accounts</th>
+        <th>From IBAN</th>
+        <th>To IBAN</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>userID</th>
       </thead>
       <tbody>
-        <user-list-item
-          v-for="user in users"
-          :key="user.userID"
-          :user="user"
-          @update="getUsers"
+        <transaction-list-item
+          v-for="transaction in transactions"
+          :key="transaction.fromIBAN"
+          :transaction="transaction"
+          @update="getTransactionsByIBAN"
         />
       </tbody>
     </table>
@@ -57,39 +54,29 @@
 
 <script>
 import axios from "../../axios-auth";
-import UserListItem from "./UserListItem.vue";
+import TransactionListItem from "./TransactionListItem.vue";
 export default {
-  name: "UserList",
+  name: "TransactionList",
   components: {
-    UserListItem,
+    TransactionListItem,
+  },
+  props: {
+      iban: String
   },
   data() {
     return {
-      users: [],
-      skip: 0,
-      limit: 0,
-      name: "",
-      accountSize: 0,
+      transactions: [],
     };
   },
   mounted() {
-    this.getUsers();
+    this.getTransactionsByIBAN();
   },
   methods: {
-    getUsersByPagination() {
+    getTransactionsByIBAN() {
       axios
-        .get(
-          "/users?skip=" +
-            this.skip +
-            "&limit=" +
-            this.limit +
-            "&name=" +
-            this.name +
-            "&accounts=" +
-            this.accountSize
-        )
+        .get("/trasactions/" + this.iban)
         .then((result) => {
-          this.users = result.data;
+          this.transactions = result.data;
         })
         .catch((error) => console.log(error));
     },

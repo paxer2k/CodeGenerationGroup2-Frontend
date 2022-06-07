@@ -15,6 +15,7 @@
           title="Fill in a correct firstname"
           v-model="user.firstName"
           placeholder="First name"
+          required
         />
         <label for="floatingInput">First name</label>
       </div>
@@ -28,6 +29,7 @@
           title="Fill in a correct lastname"
           v-model="user.lastName"
           placeholder="Last name"
+          required
         />
         <label for="floatingInput">Last name</label>
       </div>
@@ -39,6 +41,7 @@
           id="floatingInput"
           v-model="user.email"
           placeholder="name@example.com"
+          required
         />
         <label for="floatingInput">Email address</label>
       </div>
@@ -50,6 +53,7 @@
           id="floatingPassword"
           v-model="user.password"
           placeholder="Password"
+          required
         />
         <label for="floatingPassword">Password</label>
       </div>
@@ -62,6 +66,7 @@
           title="Fill in a correct lastname"
           v-model="user.address"
           placeholder="Address"
+          required
         />
         <label for="floatingInput">Address</label>
       </div>
@@ -74,6 +79,7 @@
           title="Fill in a correct phone"
           v-model="user.phoneNumber"
           placeholder="Phone"
+          required
         />
         <label for="floatingInput">Phone</label>
       </div>
@@ -117,11 +123,6 @@
           <a href="/login" class="text-light">Login</a>
         </div>
       </div>
-      <div v-if="error" id="alert-box">
-        <div class="alert alert-danger" role="alert">
-          {{ errorMessage }}
-        </div>
-      </div>
     </form>
   </div>
 </template>
@@ -161,7 +162,7 @@ export default {
           this.$router.push("/");
         })
         .catch((error) => {
-          this.errorMessage = error.headers.text;
+          this.errorMessage = error;
           console.log(error);
         });
     },

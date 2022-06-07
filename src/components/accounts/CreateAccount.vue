@@ -18,16 +18,16 @@
           </select>
         </div>
 
-        <div class="form-floating mt-4">
+        <div class="input-group mb-3">
+        <span class="input-group-text">User ID</span>
         <input
           type="text"
           class="form-control"
           id="floatingInput"
-          title="Fill in a correct phone"
-          v-model="account.userID"
+          v-model="this.account.userID"
           placeholder="Phone"
+          disabled
         />
-        <label for="floatingInput">User ID</label>
       </div>
 
       <button
@@ -46,11 +46,14 @@ import axios from "../../axios-auth";
 
 export default {
   name: "CreateAccount",
+  props: {
+    userID: String,
+  },
   data() {
     return {
       account: {
         accountType: "",
-        userID: "",
+        userID: this.userID,
       },
     };
   },

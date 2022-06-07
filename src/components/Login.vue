@@ -7,7 +7,7 @@
           <form>
             <h1 class="h3 mb-3 font-weight-normal"> Please sign in</h1>
             <div class="mt-3">
-              <label for="inputUsername" class="sr-only">email</label>
+              <label for="inputUsername" class="sr-only">Email</label>
               <input
                 id="inputUsername"
                 type="text"
