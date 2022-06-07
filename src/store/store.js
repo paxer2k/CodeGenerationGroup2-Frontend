@@ -18,7 +18,7 @@ const store = createStore({
         },
 
         isEmployee(state) {
-            return state.roles == "ROLE_EMPLOYEE";
+            return state.roles.includes("ROLE_EMPLOYEE")
         }
     },
 

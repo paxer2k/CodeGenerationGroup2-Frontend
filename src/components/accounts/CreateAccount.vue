@@ -61,7 +61,7 @@ export default {
         .then((result) => {
           console.log(result);
           alert(
-            "Account for " +
+            "Account of type " + "(" + this.account.accountType + ")" + " for " +
               this.account.userID +
               " " +
               " has been created!"
