@@ -71,7 +71,7 @@
         <label for="floatingInput">Address</label>
       </div>
 
-      <div class="form-floating mt-4">
+      <div class="form-floating">
         <input
           type="text"
           class="form-control"
@@ -84,6 +84,8 @@
         <label for="floatingInput">Phone</label>
       </div>
 
+      <br />
+
       <div class="form-check">
         <input
           class="form-check-input"
@@ -91,24 +93,31 @@
           value="ROLE_CUSTOMER"
           id="flexCheckDefault"
           v-model="user.roles"
+          
         />
         <label class="form-check-label" for="flexCheckDefault">
           ROLE_CUSTOMER
         </label>
       </div>
-      <div class="form-check">
+      <div
+        class="form-check"
+        v-if="
+          this.$store.getters.isAuthenticated && this.$store.getters.isEmployee
+        "
+      >
         <input
           class="form-check-input"
           type="checkbox"
           value="ROLE_EMPLOYEE"
           id="flexCheckChecked"
           v-model="user.roles"
-          checked
         />
         <label class="form-check-label" for="flexCheckChecked">
           ROLE_EMPLOYEE
         </label>
       </div>
+
+      <br />
 
       <button
         class="w-100 btn btn-lg btn-success"
@@ -153,7 +162,7 @@ export default {
               this.user.lastName +
               " has been created!"
           );
-          this.$router.push("/users");
+          this.$router.push("/");
         })
         .catch((error) => {
           this.errorMessage = error.response.data.message;
@@ -166,5 +175,4 @@ export default {
 
 
 <style scoped>
-
 </style>

@@ -20,7 +20,7 @@
       />
     </div>
     <div class="container-fluid mt-3">
-      <label>Query by account size:</label>
+      <label>Query by number of accounts:</label>
       <input
         type="number"
         min="0"
@@ -39,8 +39,8 @@
         <th>Email</th>
         <th>Phone</th>
         <th>Address</th>
-        <th>DayLimitLeft</th>
-        <th>TotalDayLimit</th>
+        <th>TransactionLimit</th>
+        <th>DayLimit</th>
         <th>Accounts</th>
       </thead>
       <tbody>
@@ -66,10 +66,10 @@ export default {
   data() {
     return {
       users: [],
-      skip: 0,
-      limit: 0,
+      skip: null,
+      limit: null,
       name: "",
-      accountSize: 0,
+      accountSize: null,
     };
   },
   mounted() {

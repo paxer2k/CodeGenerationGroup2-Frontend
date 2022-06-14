@@ -19,7 +19,7 @@
       </div>
 
       <div class="input-group mb-3">
-        <span class="input-group-text">Passowrd</span>
+        <span class="input-group-text">Password</span>
         <input
           type="password"
           class="form-control"
@@ -43,7 +43,7 @@ export default {
     return {
       email: "",
       password: "",
-      errorMessage: null,
+      errorMessage: "",
     };
   },
   methods: {
@@ -54,11 +54,12 @@ export default {
           email: this.email,
           password: this.password,
         })
+        
         .then(() => {
-          this.$router.replace("/users");
+          this.$router.replace("/profile");
         })
         .catch((error) => {
-          this.errorMessage = "Invalid credentials!"
+          this.errorMessage =  "invalid login credentials";
           console.log(error);
         });
     },

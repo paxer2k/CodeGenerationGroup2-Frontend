@@ -44,8 +44,8 @@ export default {
   data() {
     return {
       accounts: [],
-      skip: 0,
-      limit: 0,
+      skip: null,
+      limit: null,
       iban: "",
     };
   },

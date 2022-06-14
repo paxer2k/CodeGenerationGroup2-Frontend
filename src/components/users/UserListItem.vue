@@ -5,7 +5,7 @@
     <td>{{ user.email }}</td>
     <td>{{ user.phoneNumber }}</td>
     <td>{{ user.address }}</td>
-    <td>{{ user.currentDayLimit }}</td>
+    <td>{{ user.transactionLimit }}</td>
     <td>{{ user.dayLimit }}</td>
     <td>{{getAccountSize(user.accounts)}}</td>
 

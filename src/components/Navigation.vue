@@ -26,7 +26,7 @@
           >
         </li>
 
-        <li class="nav-item" v-if="this.$store.getters.isAuthenticated && this.$store.getters.isEmployee">
+        <li class="nav-item">
           <router-link
             to="/createuser"
             class="nav-link"
