@@ -9,9 +9,15 @@
       <input type="number" placeholder="Enter an offset" style="margin-left: 30px;" v-model="skip" />
       <input type="number" placeholder="Enter an limit" style="margin-left: 30px;" v-model="limit" />
     </div>
-    <button class="btn btn-success" style="margin-top: 10px;" @click="getAccountsByPagination()">
+    
+    <div class="container-fluid mt-3">
+    <button class="btn btn-success" @click="getAccountsByPagination()">
       Search
     </button>
+    <button class="btn btn-danger" style="margin-left: 30px;" @click="resetButton()">
+    Reset
+    </button>
+    </div>
     <h1 class="text-center" style="margin-top: 10px;">Account List</h1>
     <table class="table table-stripped">
       <thead>
@@ -46,7 +52,7 @@ export default {
       accounts: [],
       skip: null,
       limit: null,
-      iban: "",
+      iban: null,
     };
   },
   mounted() {
@@ -76,6 +82,12 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    resetButton() {
+      this.iban = null;
+      this.skip = null;
+      this.limit = null;
+      this.getAccounts()
+    }
   },
 };
 </script>

@@ -94,7 +94,7 @@
     <button class="btn btn-success" @click="getTransactionsByIBANFilter()">
       Search
     </button>
-    <button class="btn btn-danger" style="margin-left: 30px;" @click="getTransactionsByIBAN()">
+    <button class="btn btn-danger" style="margin-left: 30px;" @click="resetButton()">
       Reset
     </button>
     </div>
@@ -173,6 +173,16 @@ export default {
           this.users = result.data;
         })
         .catch((error) => console.log(error));
+    },
+    resetButton() {
+      this.startDate = null;
+      this.endDate = null;
+      this.lessBalance = null;
+      this.moreBalance = null;
+      this.equalBalance = null;
+      this.filteredIBAN = null;
+      this.picked = null;
+      this.getTransactionsByIBAN();
     },
   },
   computed: {
