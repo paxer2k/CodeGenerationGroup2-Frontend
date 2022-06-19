@@ -2,18 +2,20 @@
   <div class="container">
     <div class="container-fluid mt-3">
       <label>Query by username:</label>
-      <input type="text" placeholder="Enter a name" v-model="name" />
+      <input type="text" placeholder="Enter a name" style="margin-left: 30px;" v-model="name" />
     </div>
     <div class="container-fluid mt-3">
       <label>Query by pagination:</label>
       <input
         type="number"
+        style="margin-left: 30px;"
         min="0"
         placeholder="Enter an offset"
         v-model="skip"
       />
       <input
         type="number"
+        style="margin-left: 30px;"
         min="0"
         placeholder="Enter an limit"
         v-model="limit"
@@ -23,12 +25,13 @@
       <label>Query by number of accounts:</label>
       <input
         type="number"
+        style="margin-left: 30px;"
         min="0"
         placeholder="Enter an account size"
         v-model="accountSize"
       />
     </div>
-    <button class="btn btn-success" @click="getUsersByPagination()">
+    <button class="btn btn-success" style="margin-top: 10px;" @click="getUsersByPagination()">
       Search
     </button>
     <h1 class="text-center">User List</h1>

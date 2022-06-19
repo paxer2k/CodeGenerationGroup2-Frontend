@@ -59,7 +59,7 @@ export default {
           this.$router.replace("/profile");
         })
         .catch((error) => {
-          this.errorMessage =  "invalid login credentials";
+          this.errorMessage =  "Invalid login credentials";
           console.log(error);
         });
     },

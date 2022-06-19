@@ -78,7 +78,7 @@
           </div>
         </div>
 
-        <div class="col-md-8" v-for:="(account, index) in user.accounts">
+        <div class="col-md-14" v-for:="(account, index) in user.accounts">
             Account #{{index+1}}
           <div class="card mb-3">
             <div class="card-body">

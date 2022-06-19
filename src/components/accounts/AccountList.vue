@@ -2,17 +2,17 @@
   <div class="container">
     <div class="container-fluid mt-3">
       <label>Query by IBAN:</label>
-      <input type="text" placeholder="Enter a name" v-model="iban" />
+      <input type="text" placeholder="Enter a name" style="margin-left: 30px;" v-model="iban" />
     </div>
     <div class="container-fluid mt-3">
       <label>Query by pagination:</label>
-      <input type="number" placeholder="Enter an offset" v-model="skip" />
-      <input type="number" placeholder="Enter an limit" v-model="limit" />
+      <input type="number" placeholder="Enter an offset" style="margin-left: 30px;" v-model="skip" />
+      <input type="number" placeholder="Enter an limit" style="margin-left: 30px;" v-model="limit" />
     </div>
-    <button class="btn btn-success" @click="getAccountsByPagination()">
+    <button class="btn btn-success" style="margin-top: 10px;" @click="getAccountsByPagination()">
       Search
     </button>
-    <h1 class="text-center">Account List</h1>
+    <h1 class="text-center" style="margin-top: 10px;">Account List</h1>
     <table class="table table-stripped">
       <thead>
         <th>Account IBAN</th>
