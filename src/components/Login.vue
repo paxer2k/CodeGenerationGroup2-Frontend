@@ -26,6 +26,7 @@
           id="floatingInput"
           v-model="this.password"
           placeholder="Enter your password.."
+          autocomplete="off"
         />
       </div>
         <button type="button" @click="login()" class="btn btn-primary mt-3">
@@ -59,7 +60,7 @@ export default {
           this.$router.replace("/profile");
         })
         .catch((error) => {
-          this.errorMessage =  "Invalid login credentials";
+          this.errorMessage = "Invalid credentials"
           console.log(error);
         });
     },

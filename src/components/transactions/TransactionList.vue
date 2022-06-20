@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div v-if="errorMessage" class="alert alert-danger mt-3" role="alert">
+      {{ errorMessage }}
+    </div>
     <div class="container-fluid mt-3">
       <label>Query by start and end date:</label>
       <input
@@ -142,6 +145,7 @@ export default {
       equalBalance: null,
       filteredIBAN: null,
       picked: null,
+      errorMessage: null,
     };
   },
   mounted() {
@@ -156,7 +160,11 @@ export default {
         .then((result) => {
           this.transactions = result.data;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+         this.errorMessage = error.response.data.message;
+         console.log(error);
+        });
+
     },
     getTransactionsByIBAN() {
       axios
@@ -164,7 +172,10 @@ export default {
         .then((result) => {
           this.transactions = result.data;
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+         this.errorMessage = error.response.data.message;
+         console.log(error);
+        });
     },
     getUsers() {
       axios
