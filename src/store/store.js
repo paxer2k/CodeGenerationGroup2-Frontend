@@ -103,6 +103,7 @@ const store = createStore({
                         resolve();
                     })
                     .catch((error) => {
+                        this.errorMessage = error.response.data.message;
                         reject(error)
                     });
             })

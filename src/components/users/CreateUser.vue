@@ -86,14 +86,18 @@
 
       <br />
 
-      <div class="form-check">
+      <div
+        class="form-check"
+        v-if="
+          this.$store.getters.isAuthenticated && this.$store.getters.isEmployee
+        "
+      >
         <input
           class="form-check-input"
           type="checkbox"
           value="ROLE_CUSTOMER"
           id="flexCheckDefault"
           v-model="user.roles"
-          
         />
         <label class="form-check-label" for="flexCheckDefault">
           ROLE_CUSTOMER
